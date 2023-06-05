@@ -9,7 +9,7 @@ metadata:
 spec:
   replicas: 2
   selector:
-    matchlabels:
+    matchLabels:
       app: CoreApi
   template:
     metadata:
