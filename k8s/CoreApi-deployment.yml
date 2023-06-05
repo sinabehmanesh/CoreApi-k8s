@@ -29,6 +29,14 @@ spec:
         ports:
           - containerPort: 8000
 
+#API <=> DATABASE health check before api roll out
+      initContainers:
+      - name: init-database
+        image: busybox:1.28
+        command: ['sh', '-c', "until nslookup mysql-service.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for database; sleep 2; done"]
+
+
+#app service health checks
         livenessProbe:
           httpGet:
             path: /index.php
@@ -46,6 +54,7 @@ spec:
           initialDelaySeconds: 10
           timeoutSeconds: 3
 
+#resource limits
         resources:
           requests:
             memory: "64M"
@@ -53,3 +62,9 @@ spec:
           limits:
             memory: "128M"
             cpu: "500m"
+
+#post execution laravel migrate
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", {{php artisan migrate}}]

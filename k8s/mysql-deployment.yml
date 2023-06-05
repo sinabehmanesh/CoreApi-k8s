@@ -1,4 +1,5 @@
 ---
+#database deployment, this is a simple deployment and **NOT** for **PRODUCTION** USE.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -27,8 +28,10 @@ spec:
               name: mysql-secret
               key: mysql-root-password
         ports:
-        - containerport: 3306
+        - containerPort: 3306
           name: database
+
+#default storage class, for volumes please check mysqpl-pv.yml file.
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
