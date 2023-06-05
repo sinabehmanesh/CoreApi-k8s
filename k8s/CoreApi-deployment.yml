@@ -11,6 +11,12 @@ spec:
   selector:
     matchLabels:
       app: CoreApi
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
       labels:
