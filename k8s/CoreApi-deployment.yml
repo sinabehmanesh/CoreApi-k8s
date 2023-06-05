@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: CoreApi
+  namespace: Peoduction
+  labels:
+    app: CoreApi
+spec:
+  replicas: 2
+  selector:
+    matchlabels:
+      app: CoreApi
+  template:
+    metadata:
+      labels:
+        app: CoreApi
+    spec:
+      containers:
+      - name: CoreApi
+        image: CoreApi:latest
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8000
+
+        livenessProbe:
+          httpGet:
+            path: /index.php
+            port: 8000
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 1
+
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8000
+            scheme: HTTP
+          initialDelaySeconds: 10
+          timeoutSeconds: 3
+
+        resources:
+          requests:
+            memory: "64M"
+            cpu: "250m"
+          limits:
+            memory: "128M"
+            cpu: "500m"
