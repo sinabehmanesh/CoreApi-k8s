@@ -10,7 +10,7 @@ spec:
   type: ClusterIP
   ports:
   - name: CoreAPI-ports
-    port: 443
+    port: 80
     targetport: 8000
   selector:
     app: CoreApi
