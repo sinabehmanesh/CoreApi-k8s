@@ -29,6 +29,11 @@ spec:
         ports:
           - containerPort: 8000
 
+      initContainers:
+      - name: init-database
+        image: busybox:1.28
+        command: ['sh', '-c', "until nslookup mysql-service.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for database; sleep 2; done"]
+
         livenessProbe:
           httpGet:
             path: /index.php
