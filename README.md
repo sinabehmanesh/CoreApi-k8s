@@ -42,7 +42,7 @@ ingress.yml file is where you can talk to internet about your CoreApi service.
 we do not have a Host so the ingress will route all the incoming traffic to the backend. backend is marked as CoreApi-service.
 check Ingress config file for more info.
 
-> facts: ingress controler is prefered, mysql will not be exposed.
+>  ingress controler is prefered, mysql will not be exposed.
 
 ## Mysql
 this deployment is for **Development** usage and not **Production**.
@@ -55,6 +55,28 @@ this deployment:
 * reads root initial password from kubernetes secrets.
 * uses volumes created using mysql-pv.yml configuration.
 
-> mysql deployment, service and secrets are simple and basic, no details included, goes the same with PV and PVC.
+> mysql deployment, service and secrets are simple, no details included, goes the same with PV and PVC.
 
 
+## HPA
+you can configure HPA object or just simply enable horizontal auto scaling for your deployments.
+if so, in mannual approach, use this command to enable autoscale for CoreApi Deployment:
+`kubectl autoscale deployment CoreApi --cpu-percent=50 --min=1 --max=10 `
+this will autoscale your deployment based on CPU usage, with maximum of 10 pods.
+check HPA status using: `kubectl get hpa`
+**or**
+you can deploy a HPA object to take care of this job:
+
+```
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: CoreApi
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: CoreAPI
+  minReplicas: 4
+  maxReplicas: 10
+```
