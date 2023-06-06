@@ -61,14 +61,14 @@ this deployment:
 ## HPA
 you can configure HPA object or just simply enable horizontal auto scaling for your deployments.
 if so, in mannual approach, use this command to enable autoscale for CoreApi Deployment:
-
-`kubectl autoscale deployment CoreApi --cpu-percent=50 --min=1 --max=10 `
-
+ <br />
+`kubectl autoscale deployment CoreApi --cpu-percent=50 --min=4 --max=10 `
+ <br />
 this will autoscale your deployment based on CPU usage, with maximum of 10 pods.
 check HPA status using: `kubectl get hpa`
-
+ <br />
 **or**
-
+ <br />
 you can deploy a HPA object to take care of this job:
 
 ```
