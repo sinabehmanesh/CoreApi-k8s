@@ -67,4 +67,4 @@ spec:
         lifecycle:
           postStart:
             exec:
-              command: ["/bin/sh", "-c", {{php artisan migrate}}]
+              command: ["/bin/sh", "-c", 'php', 'artisan', 'migrate']

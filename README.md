@@ -7,14 +7,15 @@ This is a Basic **Laravel** project Ready to be deployed to Kubernetes Cluster a
 * laravel FPM Api
 
 ## CoreApi
-CoreApi Directory hosts the source code with all of the configurations required.
-it does host a Dockerfile that is a Container in API Deployment.
+CoreApi Directory hosts the source code with all of the configurations required. 
+it does host a Dockerfile that is a Container in API Deployment. <br />
 .env file can be configured using configMap.
 
 ### CoreApi Dockerfile
-Core api dockerfile is using php frpm as base Image(**8.2**)
+Core api dockerfile is using php frpm as base Image(**8.2**) <br />
+this Dockerfile can be change to add nginx as proxy pass for FPM socket. depends on the Production plan. 
+a simple nginx installation and proxy pass on \ location block will get the job done. <br />
 you can add php extentions and more configuration as you need.
-feel free to add more content such as changing user, workdir, multistaging and etc.
 
 ## API
 API directory is where the laravel api deployment and its service is configured.
@@ -38,7 +39,7 @@ this service:
 * after deployment, ready to accept traffic from ingress.
 
 ## Ingress
-ingress.yml file is where you can talk to internet about your CoreApi service.
+ingress.yml file is where you can talk to internet about your CoreApi service. <br />
 we do not have a Host so the ingress will route all the incoming traffic to the backend. backend is marked as CoreApi-service.
 check Ingress config file for more info.
 
@@ -86,7 +87,6 @@ spec:
 ```
 
 ## Notes:
-This configuration supports helm improvements and various CICD pipelines.
+This configuration supports helm improvements and various CICD pipelines. <br />
 for this project, php version is 8.2 and mysql is 8.0. you can simply change them in configuration. <br />
-thats all.
-change the deployment rollout strategy to meet your requirements.
+change the deployment rollout strategy to meet your requirements. <br />
