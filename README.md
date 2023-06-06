@@ -84,3 +84,9 @@ spec:
   minReplicas: 4
   maxReplicas: 10
 ```
+
+## Notes:
+This configuration supports helm improvements and various CICD pipelines.
+for this project, php version is 8.2 and mysql is 8.0. you can simply change them in configuration. <br />
+thats all.
+change the deployment rollout strategy to meet your requirements.
