@@ -1,4 +1,5 @@
 ---
+#Coreapi service, this will be mapped to Ingress.
 apiVersion: v1
 kind: Service
 metadata:

@@ -1,4 +1,6 @@
 ---
+#i devided to use a different namespace for this project, instead of default!
+#namespace and other variables can be configured differently when using helm chart.
 apiVersion: v1
 kind: Namespace
 metadata:
