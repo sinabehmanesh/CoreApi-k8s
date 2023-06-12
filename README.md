@@ -38,6 +38,12 @@ this service:
 * map containerPort 8000 to 80.
 * after deployment, ready to accept traffic from ingress.
 
+### coreapi configmap
+CoreApi-configmap.yml will create all configuration for you. all you have to do is to change values for your desired values.
+
+### coreapi secret
+Just put your god damn **Database Passowrd** in this file and let k8s handle your secret ;).
+
 ## Ingress
 ingress.yml file is where you can talk to internet about your CoreApi service. <br />
 we do not have a Host so the ingress will route all the incoming traffic to the backend. backend is marked as CoreApi-service.
